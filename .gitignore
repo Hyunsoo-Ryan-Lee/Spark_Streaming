@@ -159,5 +159,5 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-./workspace/checkpoint_dir
-./workspace/output
+**/workspace/checkpoint_dir
+**/workspace/output
