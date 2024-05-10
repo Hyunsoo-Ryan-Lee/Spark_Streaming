@@ -84,7 +84,7 @@ services:
       - kafka3
 
   bd-pyspark-jupyter:
-    image: hyunsoolee0506/sparkcluster:3.3.0
+    image: hyunsoolee0506/sparkcluster:3.3.0-v2
     container_name: pyspark-jupyter-lab
     ports:
         - 8888:8888
@@ -94,7 +94,7 @@ services:
         SPARK_UI_PORT: 4040
     volumes:
         - spark_data:/data:rw
-        - ./workspace:/home/workspace
+        - ./sparklab:/home/workspace
         - /tmp/spark-events-local:/tmp/spark-events
     restart: always
   bd-spark-master:
@@ -161,5 +161,35 @@ services:
     volumes:
       - /tmp/spark-events-local:/tmp/spark-events
     restart: always
+
+  db:
+    image: mysql:8.0.22
+    hostname: mysql
+    restart: always
+    ports:
+      - '3307:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      TZ: Asia/Seoul
+    volumes:
+      - /tmp/mysql/data:/var/lib/mysql
+      - /tmp/mysql/init:/docker-entrypoint-initdb.d
+    platform: linux/x86_64
+
+  sqlpad:
+    image: sqlpad/sqlpad:5
+    hostname: 'sqlpad'
+    ports:
+      - '3100:3000'
+    environment:
+      SQLPAD_ADMIN: 'admin@sqlpad.com'
+      SQLPAD_ADMIN_PASSWORD: 'admin'
+      SQLPAD_APP_LOG_LEVEL: debug
+      SQLPAD_WEB_LOG_LEVEL: warn
+      SQLPAD_SEED_DATA_PATH: /etc/sqlpad/seed-data
+    volumes:
+      - /tmp/seed-data:/etc/sqlpad/seed-data
+
 volumes:
   spark_data:
+
