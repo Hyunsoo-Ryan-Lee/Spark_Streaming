@@ -88,11 +88,14 @@ services:
     container_name: pyspark-jupyter-lab
     ports:
         - 8888:8888
+        - 4040:4040
     environment:
         JUPYTER_PORT: 8888
+        SPARK_UI_PORT: 4040
     volumes:
         - spark_data:/data:rw
         - ./workspace:/home/workspace
+        - /tmp/spark-events-local:/tmp/spark-events
     restart: always
   bd-spark-master:
     image: bde2020/spark-master:3.3.0-hadoop3.3

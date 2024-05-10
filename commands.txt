@@ -1,0 +1,8 @@
+docker builder prune
+
+
+[Kafka Tuning]
+- Kafka Topic 확인
+    - kafka-topics --describe --topic user --bootstrap-server localhost:19092
+- Kafka Topic partition 수 변경
+    - kafka-topics --alter --topic user --partitions 8 --bootstrap-server localhost:19092
