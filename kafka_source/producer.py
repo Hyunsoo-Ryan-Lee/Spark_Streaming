@@ -22,5 +22,5 @@ for i in range(1, ORDER_LIMIT+1):
     producer.send(topic_name, json.dumps(data).encode("utf-8"))
     print("=="*30)
     print(data)
-    print(f">>>>>>>>>>>  {i+1} MESSAGE SENT  <<<<<<<<<<<<")
+    print(f">>>>>>>>>>>  {i} MESSAGE SENT  <<<<<<<<<<<<")
     time.sleep(1)
