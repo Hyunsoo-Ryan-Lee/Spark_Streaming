@@ -5,7 +5,7 @@ from pprint import pprint
 from fakedata import create_fakeuser
 
 
-topic_name = "user"
+topic_name = "fake"
 producer = KafkaProducer(
     bootstrap_servers=["localhost:9091", "localhost:9092", "localhost:9093"],
     # value_serializer=lambda x: dumps(x).encode("utf-8"),

@@ -1,0 +1,52 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8.0.22
+    hostname: mysql
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      TZ: Asia/Seoul
+    volumes:
+      - /tmp/mysql/data:/var/lib/mysql
+      - /tmp/mysql/init:/docker-entrypoint-initdb.d
+    platform: linux/x86_64
+    networks: 
+      - dockercompose_dataops
+
+  postgres:
+    image: postgres:15
+    hostname: postgresql
+    restart: always
+    volumes:
+      - /tmp/postgresql/data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: yein
+      POSTGRES_PASSWORD: "941021"
+      POSTGRES_DB: postgres
+    networks: 
+      - dockercompose_dataops
+
+  sqlpad:
+    image: sqlpad/sqlpad:5
+    hostname: 'sqlpad'
+    ports:
+      - '3100:3000'
+    environment:
+      SQLPAD_ADMIN: 'admin@sqlpad.com'
+      SQLPAD_ADMIN_PASSWORD: 'admin'
+      SQLPAD_APP_LOG_LEVEL: debug
+      SQLPAD_WEB_LOG_LEVEL: warn
+      SQLPAD_SEED_DATA_PATH: /etc/sqlpad/seed-data
+    volumes:
+      - /tmp/seed-data:/etc/sqlpad/seed-data
+    networks: 
+      - dockercompose_dataops
+
+networks:
+  dockercompose_dataops:
+    external: true

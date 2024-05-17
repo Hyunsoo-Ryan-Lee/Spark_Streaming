@@ -1,0 +1,51 @@
+{
+    "name": "postgres-connector",
+    "config": {
+      "name": "postgres-connector",
+      "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+      "database.hostname": "3.38.160.124",
+      "database.port": "5432",
+      "database.user": "yein",
+      "database.password": "941021",
+      "database.dbname": "postgres",
+      "database.server.id": "54321",
+      "database.server.name": "dbserver2",
+      "database.whitelist": "postgres",
+      "plugin.name": "pgoutput",
+      "database.allowPublicKeyRetrieval":"true",    
+      "database.connectionTimeZone": "Asia/Seoul",
+      "include.schema.changes": "false",
+      "topic.prefix": "postgres",
+      "table.include.list": "public.*",
+      "skip.messages.without.change": "true",
+      "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+      "key.converter.schemas.enable": "false",
+      "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+      "value.converter.schemas.enable": "false",
+      "snapshot.locking.mode": "none",
+      "schema.history.internal": "io.debezium.storage.file.history.FileSchemaHistory",
+      "schema.history.internal.kafka.bootstrap.servers": "kafka1:19091,kafka2:19092,kafka3:19093",
+      "schema.history.internal.kafka.topic": "schemahistory.demo",
+      "schema.history.internal.file.filename": "/tmp/postgres-schema-history.dat"
+    }
+  }
+
+{
+  "name": "your-connector",
+  "config": {
+      "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+      "tasks.max": "1",
+      "plugin.name":"pgoutput",
+      "database.hostname": "3.38.160.124",
+      "database.port": "5432",
+      "database.user": "yein",
+      "database.password": "941021",
+      "database.dbname" : "postgres",
+      "database.server.name": "pg_repl",
+      "table.include.list": "public.*",
+      "publication.autocreate.mode":"filtered",
+      "key.converter": "io.confluent.connect.avro.AvroConverter",
+      "value.converter": "io.confluent.connect.avro.AvroConverter",
+      "value.converter.schemas.enable": false
+  }
+}
