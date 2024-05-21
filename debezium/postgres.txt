@@ -1,0 +1,41 @@
+{
+  "name": "postgres-connector-str",
+  "config": {
+  "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+  "plugin.name": "pgoutput",
+  "database.hostname": "postgres",
+  "database.port": "5432",
+  "database.user": "yein",
+  "database.password": "941021",
+  "database.dbname": "postgres",
+  "database.server.name": "postgres",
+  "table.include.list": "public.*",
+  "table.whitelist": "public.*",
+  "topic.prefix": "pgdemo",
+  "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+  "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+  "key.converter.schemas.enable": "false",
+  "value.converter.schemas.enable": "false"
+  }
+}
+
+{
+  "name": "postgres-connector-json",
+  "config": {
+  "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+  "plugin.name": "pgoutput",
+  "database.hostname": "postgres",
+  "database.port": "5432",
+  "database.user": "yein",
+  "database.password": "941021",
+  "database.dbname": "postgres",
+  "database.server.name": "postgres",
+  "table.include.list": "public.tips",
+  "table.whitelist": "public.tips",
+  "topic.prefix": "pgdemo",
+  "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+  "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+  "key.converter.schemas.enable": "false",
+  "value.converter.schemas.enable": "false"
+  }
+}

@@ -1,0 +1,61 @@
+1.5버전에서 유효
+{
+  "name": "mysql-connector",
+  "config": {
+      "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+      "tasks.max": "1",
+      "database.hostname": "3.38.160.124",
+      "database.port": "3306",
+      "database.user": "hyunsoo",
+      "database.password": "910506",
+      "database.allowPublicKeyRetrieval": "true",
+      "database.server.id": "10021",
+      "database.server.name": "mysqlserver",
+      "database.include.list": "dataops",
+      "table.include.list": "dataops.*",
+      "database.serverTimezone": "Asia/Seoul",
+       "database.connectionTimeZone": "Asia/Seoul",
+      "database.history.kafka.bootstrap.servers": "kafka1:19091,kafka2:19092,kafka3:19093",
+      "database.history.kafka.topic": "mysql-his",
+      "topic.prefix": "mysqldemo",
+      "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+      "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+      "time.precision.mode": "connect",
+      "transforms": "unwrap",
+      "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+      "transforms.unwrap.drop.tombstones": "false"
+  }
+}
+
+2.4 버전
+{
+  "name": "mysql-connector",
+  "config": {
+      "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+      "tasks.max": "1",
+      "database.hostname": "3.38.160.124",
+      "database.port": "3306",
+      "database.user": "hyunsoo",
+      "database.password": "910506",
+      "database.allowPublicKeyRetrieval": "true",
+      "database.server.id": "10021",
+      "database.server.name": "mysqlserver",
+      "database.include.list": "dataops",
+      "table.include.list": "dataops.*",
+      "database.serverTimezone": "Asia/Seoul",
+      "database.connectionTimeZone": "Asia/Seoul",
+      "schema.history.internal": "io.debezium.storage.file.history.FileSchemaHistory",
+      "schema.history.internal.kafka.bootstrap.servers": "kafka1:19091,kafka2:19092,kafka3:19093",
+      "schema.history.internal.kafka.topic": "schemahistory.demo",
+      "schema.history.internal.file.filename": "/tmp/postgres-schema-history.dat",
+      "topic.prefix": "mysqldemo",
+      "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+      "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+      "key.converter.schemas.enable": "false",
+      "value.converter.schemas.enable": "false",
+      "time.precision.mode": "connect",
+      "transforms": "unwrap",
+      "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+      "transforms.unwrap.drop.tombstones": "false"
+  }
+}

@@ -14,7 +14,7 @@ services:
       - /mnt/d/kafka/data/zookeeper/datalog:/datalog
     restart: always
     networks: 
-      - dataops
+      - dockercompose_dataops
 
   kafka1:
     image: confluentinc/cp-kafka:7.0.0
@@ -35,7 +35,7 @@ services:
     depends_on:
       - zookeeper
     networks: 
-      - dataops
+      - dockercompose_dataops
 
   kafka2:
     image: confluentinc/cp-kafka:7.0.0
@@ -56,7 +56,7 @@ services:
     depends_on:
       - zookeeper
     networks: 
-      - dataops
+      - dockercompose_dataops
 
   kafka3:
     image: confluentinc/cp-kafka:7.0.0
@@ -77,7 +77,7 @@ services:
     depends_on:
       - zookeeper
     networks: 
-      - dataops
+      - dockercompose_dataops
 
   kafdrop:
     image: obsidiandynamics/kafdrop
@@ -91,8 +91,8 @@ services:
       - kafka2
       - kafka3
     networks: 
-      - dataops
+      - dockercompose_dataops
 
 networks:
-  dataops:
-    driver: bridge
+  dockercompose_dataops:
+    external: true

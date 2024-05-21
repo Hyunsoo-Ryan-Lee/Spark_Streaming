@@ -1,7 +1,8 @@
 version: '3'
 services:
   bd-pyspark-jupyter:
-    image: hyunsoolee0506/sparkcluster:3.3.0-v2
+    image: hyunsoolee0506/pyspark-jupyter:3.3.0
+    # image: hyunsoolee0506/sparkcluster:3.3.0-v2
     container_name: pyspark-jupyter-lab
     ports:
         - 8888:8888
@@ -11,7 +12,7 @@ services:
         SPARK_UI_PORT: 4040
     volumes:
         - spark_data:/data:rw
-        - /home/ubuntu/workspace/Spark_Streaming/sparklab:/home/workspace
+        - /home/ubuntu/workspace/Spark_Streaming/sparklab:/workspace/spark
         - /tmp/spark-events-local:/tmp/spark-events
     restart: always
     networks: 

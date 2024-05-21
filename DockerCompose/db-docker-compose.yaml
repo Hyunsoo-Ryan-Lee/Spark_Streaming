@@ -17,11 +17,11 @@ services:
       - dockercompose_dataops
 
   postgres:
-    image: postgres:15
+    image: debezium/postgres:13
     hostname: postgresql
     restart: always
-    volumes:
-      - /tmp/postgresql/data:/var/lib/postgresql/data
+    # volumes:
+    #   - /tmp/postgresql/data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     environment:

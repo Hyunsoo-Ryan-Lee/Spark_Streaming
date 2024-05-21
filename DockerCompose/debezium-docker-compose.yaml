@@ -1,16 +1,48 @@
-version: '3.7'
+# version: '3'
+# services:
+#   kafka-connect:
+#     image: confluentinc/cp-kafka-connect-base:7.6.0
+#     container_name: kafka-connect
+#     ports:
+#       - "8084:8083"
+#     networks:
+#       - dockercompose_dataops
+#     volumes:
+#       - /home/ubuntu/workspace/Spark_Streaming/debezium/kafka-connect.properties:/etc/kafka/kafka-connect.properties:ro
+#       - /home/ubuntu/workspace/Spark_Streaming/debezium/config.json:/tmp/config.json:ro
 
+# networks:
+#   dockercompose_dataops:
+#     external: true
+version: '3'
 services:
-  kafka-connect:
-    image: confluentinc/cp-kafka-connect-base:7.6.0
-    container_name: kafka-connect
+  debezium:
+    image: debezium/connect:2.4
+    environment:
+      BOOTSTRAP_SERVERS: kafka1:19091,kafka2:19092,kafka3:19093
+      GROUP_ID: 1
+      CONFIG_STORAGE_TOPIC: connect_configs
+      OFFSET_STORAGE_TOPIC: connect_offsets
+      STATUS_STORAGE_TOPIC: my_status_topic
+      KEY_CONVERTER: org.apache.kafka.connect.storage.StringConverter
+      VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      # CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8085
+      # CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8085
     ports:
-      - "8084:8083"
-    networks:
+      - 8084:8083
+    networks: 
       - dockercompose_dataops
-    volumes:
-      - /home/ubuntu/workspace/Spark_Streaming/debezium/kafka-connect.properties:/etc/kafka/kafka-connect.properties:ro
-      - /home/ubuntu/workspace/Spark_Streaming/debezium/config.json:/tmp/config.json:ro
+
+  # schema-registry:
+  #   image: confluentinc/cp-schema-registry:7.6.1
+  #   environment:
+  #     - SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL=zookeeper:2181
+  #     - SCHEMA_REGISTRY_HOST_NAME=schema-registry
+  #     - SCHEMA_REGISTRY_LISTENERS=http://schema-registry:8085,http://localhost:8085
+  #   ports:
+  #     - 8085:8085
+  #   networks: 
+  #     - dockercompose_dataops
 
 networks:
   dockercompose_dataops:

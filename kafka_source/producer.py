@@ -5,7 +5,7 @@ from pprint import pprint
 from fakedata import create_fakeuser
 
 
-topic_name = "fake"
+topic_name = "demo"
 producer = KafkaProducer(
     bootstrap_servers=["localhost:9091", "localhost:9092", "localhost:9093"],
     # value_serializer=lambda x: dumps(x).encode("utf-8"),
@@ -23,4 +23,4 @@ for i in range(1, ORDER_LIMIT+1):
     print("=="*30)
     print(data)
     print(f">>>>>>>>>>>  {i} MESSAGE SENT  <<<<<<<<<<<<")
-    time.sleep(1)
+    time.sleep(2)
