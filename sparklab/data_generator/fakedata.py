@@ -3,7 +3,6 @@ import shortuuid
 from datetime import datetime
 
 fake = Faker()
-
 fake.profile()
 
 def create_fakeuser() -> dict:

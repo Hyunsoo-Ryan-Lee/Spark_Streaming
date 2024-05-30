@@ -13,14 +13,8 @@ producer = KafkaProducer(
 ORDER_LIMIT = 100
 for i in range(1, ORDER_LIMIT+1):
     data = create_fakeuser()
-    # data = {
-    #     "order_id": i,
-    #     "user_id": f"hyunsoo_{i}",
-    #     "total_cost": i*1000
-    # }
-
     producer.send(topic_name, json.dumps(data).encode("utf-8"))
     print("=="*30)
     print(data)
     print(f">>>>>>>>>>>  {i} MESSAGE SENT  <<<<<<<<<<<<")
-    time.sleep(2)
+    time.sleep(1)
