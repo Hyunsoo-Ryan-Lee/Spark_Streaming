@@ -3,7 +3,7 @@ from kafka import TopicPartition, OffsetAndMetadata
 import json, ast
 from datetime import datetime
 
-topic_name = "dev"
+topic_name = "sink"
 
 consumer = KafkaConsumer(
     topic_name,
